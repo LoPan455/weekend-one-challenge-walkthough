@@ -15,7 +15,7 @@ $(document).ready(function(){
       '<td>' + idNumber + '</td>' +
       '<td>' + jobTitle + '</td>' +
       '<td>' + annualSalary + '</td>' +
-      '<td><button class="deleteEmployeeButton">Delete ' + firstName + '</button></td>' +
+      '<td><button class="deleteEmployeeButton" data-salary=" ' + annualSalary + ' ">Delete ' + firstName + '</button></td>' +
       '</tr>'
     );
     // Add Monthly salary expenses to the Dom
@@ -31,7 +31,15 @@ $(document).ready(function(){
   });
 // Addting listener for clicking delete employee buttons
   $('#employeeTableBody').on('click','.deleteEmployeeButton', function(){
-    $(this).parent().parent().remove(); // selecting the row I want to delete
+    // removing employee salary from total
+    var deletedEmployeeSalary = $(this).data('salary');
+    var deletedEmployeeMonthlyExpenses = deletedEmployeeSalary / 12;
+    var previousMonthlyExpenses = $('#monthlyExpenses').text();
+    var newTotalMonthlyExpenses = previousMonthlyExpenses - deletedEmployeeMonthlyExpenses
+    $('#monthlyExpenses').text(newTotalMonthlyExpenses);
+
+    // selecting the row I want to delete
+    $(this).parent().parent().remove();
 
   });
 
