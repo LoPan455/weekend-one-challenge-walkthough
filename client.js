@@ -24,7 +24,14 @@ $(document).ready(function(){
     var totalMonthlyExpenses = parseInt(previousSalaryTotal) + newEmployeeMonthlyExpenses;
     $('#monthlyExpenses').text(totalMonthlyExpenses);
 
+    //Clear out input boxes
+    $('.employeeFormInput').val('');
 
+
+  });
+// Addting listener for clicking delete employee buttons
+  $('#employeeTableBody').on('click','.deleteEmployeeButton', function(){
+    $(this).parent().parent().remove(); // selecting the row I want to delete
 
   });
 
